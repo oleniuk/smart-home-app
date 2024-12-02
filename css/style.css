@@ -676,9 +676,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
 /*================END Музон==============*/
 
-
-
-
+/*===============Навігаційні кнопки=============*/
 .navigation-buttons {
   position: fixed;
   right: 20px;
@@ -703,14 +701,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 .scroll-button:hover {
   background-color: #0056b3;
 }
-
-
-
-
-
-
-
-
+/*===============END Навігаційні кнопки=============*/
 
 @media (max-width: 410px) {
   .container {
