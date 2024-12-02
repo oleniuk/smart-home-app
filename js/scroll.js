@@ -9,11 +9,13 @@ function goToScreen(index) {
 }
 
 // Додаємо функціонал кнопок
-document.getElementById('scroll-up').addEventListener('click', () => {
+document.getElementById('scroll-up').addEventListener('click', (event) => {
+  event.stopPropagation(); // Запобігає блокуванню події
   goToScreen(currentIndex - 1); // Перехід на екран вище
 });
 
-document.getElementById('scroll-down').addEventListener('click', () => {
+document.getElementById('scroll-down').addEventListener('click', (event) => {
+  event.stopPropagation(); // Запобігає блокуванню події
   goToScreen(currentIndex + 1); // Перехід на екран нижче
 });
 
@@ -53,7 +55,16 @@ window.addEventListener(
   { passive: false }
 );
 
-// Забезпечення роботи кнопок:
-document.getElementById('scroll-controls').addEventListener('click', (event) => {
+// Додаткове забезпечення для мобільних пристроїв:
+// Додаємо слухачі для подій `touchstart` і `touchend` на кнопках
+document.getElementById('scroll-up').addEventListener('touchstart', (event) => {
   event.stopPropagation(); // Запобігає блокуванню події
+  event.preventDefault(); // Уникнути конфліктів із swipe
+  goToScreen(currentIndex - 1);
+});
+
+document.getElementById('scroll-down').addEventListener('touchstart', (event) => {
+  event.stopPropagation();
+  event.preventDefault();
+  goToScreen(currentIndex + 1);
 });
