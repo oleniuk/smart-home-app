@@ -17,12 +17,31 @@ document.getElementById('scroll-down').addEventListener('click', () => {
   goToScreen(currentIndex + 1); // Перехід на екран нижче
 });
 
-// Забороняємо скрол мишею
+// Забороняємо вертикальну прокрутку мишею
 window.addEventListener('wheel', (event) => {
-  event.preventDefault(); // Відключає прокрутку сторінки
+  if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+    // Забороняємо прокрутку по вертикалі
+    event.preventDefault();
+  }
 }, { passive: false });
 
-// Забороняємо скрол через свайпи (мобільні пристрої)
+// Забороняємо вертикальну прокрутку через свайпи (мобільні пристрої)
+let touchStartX = 0;
+let touchStartY = 0;
+
+window.addEventListener('touchstart', (event) => {
+  const touch = event.changedTouches[0];
+  touchStartX = touch.clientX;
+  touchStartY = touch.clientY;
+});
+
 window.addEventListener('touchmove', (event) => {
-  event.preventDefault(); // Відключає прокрутку сторінки
+  const touch = event.changedTouches[0];
+  const deltaX = touch.clientX - touchStartX;
+  const deltaY = touch.clientY - touchStartY;
+
+  // Дозволяємо горизонтальні рухи, але блокуємо вертикальну прокрутку
+  if (Math.abs(deltaY) > Math.abs(deltaX)) {
+    event.preventDefault();
+  }
 }, { passive: false });
